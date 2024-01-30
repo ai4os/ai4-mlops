@@ -1,0 +1,3 @@
+[submodule "mlflow-compose"]
+	path = mlflow-compose
+	url = https://codebase.helmholtz.cloud/m-team/ai/mlflow-compose
