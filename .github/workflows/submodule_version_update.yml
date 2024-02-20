@@ -32,6 +32,7 @@ jobs:
 
         # Update the local submodules in the main repository
         git submodule update --recursive --remote
+        git push origin
 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
