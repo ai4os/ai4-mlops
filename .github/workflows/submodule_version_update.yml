@@ -12,17 +12,25 @@ jobs:
       uses: actions/checkout@v2
       with:
         submodules: 'recursive'
-
-
+        
+    - name: Update mlflow submodule
+      run: |
+        mlflow_commit=$(curl -s "https://api.github.com/repos/m-team-kit/mlflow-auth-gui/commits/main" | jq -r '.sha')
+        echo "MLflow submodule latest commit: $mlflow_commit"
+        git submodule update --init --remote m-team-kit/mlflow-auth-gui  # Initialize and update submodule
+        cd m-team-kit/mlflow-auth-gui
+        git checkout $mlflow_commit
+        cd ..
+      
     - name: Update frouros submodule
       run: |
         frouros_commit=$(curl -s "https://api.github.com/repos/IFCA-Advanced-Computing/frouros/commits/main" | jq -r '.sha')
         echo "Frouros submodule latest commit: $frouros_commit"
-        git submodule update --remote frouros
+        git submodule update --init --remote frouros
         cd frouros
         git checkout $frouros_commit
         cd ..
-
+     
     - name: Commit and Push Changes
       run: |
         git config --global user.email "actions@github.com"
