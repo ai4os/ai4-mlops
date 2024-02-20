@@ -10,29 +10,31 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
 
-    - name: Update Submodules
+    - name: Update mlflow submodule
       run: |
-        # Function to get the latest commit hash of a repository
-        get_latest_commit() {
-          repository=$1
-          branch=$2
-          commit=$(curl -s "https://api.github.com/repos/$repository/commits/$branch" | jq -r '.sha')
-          echo $commit
-        }
+        mlflow_commit=$(curl -s "https://api.github.com/repos/m-team-kit/mlflow-auth-gui/commits/main" | jq -r '.sha')
+        echo "MLflow submodule latest commit: $mlflow_commit"
+        git submodule update --remote mlflow-auth-gui
+        cd mlflow-auth-gui
+        git checkout $mlflow_commit
+        cd ..
 
-        mlflow_repository="m-team-kit/mlflow-auth-gui"
-        mlflow_branch="main"
-        frouros_repository="IFCA-Advanced-Computing/frouros"
-        frouros_branch="main"
+    - name: Update frouros submodule
+      run: |
+        frouros_commit=$(curl -s "https://api.github.com/repos/IFCA-Advanced-Computing/frouros/commits/main" | jq -r '.sha')
+        echo "Frouros submodule latest commit: $frouros_commit"
+        git submodule update --remote frouros
+        cd frouros
+        git checkout $frouros_commit
+        cd ..
 
-        # Get the latest commit of each submodule
-        mlflow_commit=$(get_latest_commit $mlflow_repository $mlflow_branch)
-        frouros_commit=$(get_latest_commit $frouros_repository $frouros_branch)
-
-        # Update the local submodules in the main repository
-        git submodule update --recursive --remote
-        git push origin
-
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add .
+        git commit -m "Update submodule commits"
+        git push
