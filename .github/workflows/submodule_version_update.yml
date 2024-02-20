@@ -21,10 +21,9 @@ jobs:
           echo $commit
         }
 
-        # Replace these values with your submodule details
-        mlflow_repository="https://github.com/ai4os/ai4-mlflow"
+        mlflow_repository="ai4os/ai4-mlflow"
         mlflow_branch="main"
-        frouros_repository="https://github.com/IFCA-Advanced-Computing/frouros"
+        frouros_repository="IFCA-Advanced-Computing/frouros"
         frouros_branch="main"
 
         # Get the latest commit of each submodule
