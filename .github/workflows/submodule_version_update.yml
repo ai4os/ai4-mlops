@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Update Submodules
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run every day at midnight
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Update Submodules
+      run: |
+        # Function to get the latest commit hash of a repository
+        get_latest_commit() {
+          repository=$1
+          branch=$2
+          commit=$(curl -s "https://api.github.com/repos/$repository/commits/$branch" | jq -r '.sha')
+          echo $commit
+        }
+
+        # Replace these values with your submodule details
+        frouros_repository="IFCA-Advanced-Computing/frouros"
+        frouros_branch="main"
+
+        # Get the latest commit of each submodule
+        frouros_commit=$(get_latest_commit $frouros_repository $frouros_branch)
+
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
