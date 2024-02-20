@@ -21,7 +21,7 @@ jobs:
           echo $commit
         }
 
-        mlflow_repository="ai4os/ai4-mlflow"
+        mlflow_repository="m-team-kit/mlflow-auth-gui"
         mlflow_branch="main"
         frouros_repository="IFCA-Advanced-Computing/frouros"
         frouros_branch="main"
