@@ -22,18 +22,14 @@ jobs:
         }
 
         # Replace these values with your submodule details
-        mlflow_repository="ai4os/ai4-mlflow"
+        mlflow_repository="https://github.com/ai4os/ai4-mlflow"
         mlflow_branch="main"
-        frouros_repository="IFCA-Advanced-Computing/frouros"
+        frouros_repository="https://github.com/IFCA-Advanced-Computing/frouros"
         frouros_branch="main"
 
         # Get the latest commit of each submodule
         mlflow_commit=$(get_latest_commit $mlflow_repository $mlflow_branch)
         frouros_commit=$(get_latest_commit $frouros_repository $frouros_branch)
-
-        # Update the README with the latest commit links
-        sed -i "s|MLflow: \[\(.*\)\]|MLflow: [\1](https://github.com/$mlflow_repository/tree/$mlflow_commit)|" README.md
-        sed -i "s|Frouros: \[\(.*\)\]|Frouros: [\1](https://github.com/$frouros_repository/tree/$frouros_commit)|" README.md
 
         # Update the local submodules in the main repository
         git submodule update --recursive --remote
