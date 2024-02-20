@@ -18,7 +18,7 @@ jobs:
         mlflow_commit=$(curl -s "https://api.github.com/repos/ai4os/ai4-mlops/commits/main" | jq -r '.sha')
         echo "MLflow submodule latest commit: $mlflow_commit"
         git submodule update --init --remote # Initialize and update submodule
-        cd ai4-mlops
+        cd ai4-mlflow
         git checkout $mlflow_commit
         cd ..
       
