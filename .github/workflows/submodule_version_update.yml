@@ -15,9 +15,9 @@ jobs:
 
     - name: Update mlflow submodule
       run: |
-        mlflow_commit=$(curl -s "https://api.github.com/repos/m-team-kit/mlflow-auth-gui/commits/main" | jq -r '.sha')
+        mlflow_commit=$(curl -s "https://api.github.com/repos/ai4os/ai4-mlflow/commits/main" | jq -r '.sha')
         echo "MLflow submodule latest commit: $mlflow_commit"
-        git submodule update --remote mlflow-auth-gui
+        git submodule update --remote ai4-mlflow
         cd mlflow-auth-gui
         git checkout $mlflow_commit
         cd ..
