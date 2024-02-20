@@ -13,23 +13,19 @@ jobs:
       with:
         submodules: 'recursive'
         
-    - name: Update mlflow submodule
+    - name: Update ai4-mlflow submodule
       run: |
-        mlflow_commit=$(curl -s "https://api.github.com/repos/ai4os/ai4-mlops/commits/main" | jq -r '.sha')
+        mlflow_commit=$(curl -s "https://api.github.com/repos/m-team-kit/mlflow-auth-gui/commits/main" | jq -r '.sha')
         echo "MLflow submodule latest commit: $mlflow_commit"
-        git submodule update --init --remote # Initialize and update submodule
-        cd ai4-mlflow
-        git checkout $mlflow_commit
-        cd ..
+        git submodule update --remote -- ai4-mlflow  # Update specific submodule
+        git -C ai4-mlflow checkout $mlflow_commit  # Checkout specific commit
       
     - name: Update frouros submodule
       run: |
         frouros_commit=$(curl -s "https://api.github.com/repos/IFCA-Advanced-Computing/frouros/commits/main" | jq -r '.sha')
         echo "Frouros submodule latest commit: $frouros_commit"
-        git submodule update --init --remote
-        cd frouros
-        git checkout $frouros_commit
-        cd ..
+        git submodule update --remote -- frouros  # Update specific submodule
+        git -C frouros checkout $frouros_commit  # Checkout specific commit
      
     - name: Commit and Push Changes
       run: |
