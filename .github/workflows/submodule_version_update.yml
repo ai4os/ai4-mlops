@@ -27,6 +27,13 @@ jobs:
         echo "Frouros submodule latest commit: $frouros_commit"
         git submodule update --remote -- frouros  # Update specific submodule
         git -C frouros checkout $frouros_commit  # Checkout specific commit
+
+    - name: Check for Changes
+      run: |
+        if git diff-index --quiet HEAD --; then
+          echo "No changes to commit. Exiting gracefully."
+          exit 0
+        fi
      
     - name: Commit and Push Changes
       run: |
