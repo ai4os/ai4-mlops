@@ -28,20 +28,20 @@ jobs:
         git submodule update --remote -- frouros  # Update specific submodule
         git -C frouros checkout $frouros_commit  # Checkout specific commit
 
-    - name: Check for Changes
+    - name: Check for Changes, Commit/Push
       run: |
         if git diff-index --quiet HEAD --; then
           echo "No changes to commit. Exiting gracefully."
           exit 0
+        else
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add .
+          git commit -m "Update submodule commits"
+          git push
         fi
      
-    - name: Commit and Push Changes
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name "GitHub Actions"
-        git add .
-        git commit -m "Update submodule commits"
-        git push
+
 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
