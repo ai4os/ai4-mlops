@@ -3,11 +3,11 @@ name: Update Submodules
 #on:
 #  schedule:
 #    - cron: '0 0 * * *'  # Run every day at midnight
-permissions:
-  contents: write
 jobs:
   update-submodules:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - name: Checkout Repository
