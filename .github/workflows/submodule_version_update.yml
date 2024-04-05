@@ -2,9 +2,9 @@ name: Update Submodules
 
 on:
   # Allows you to run this workflow manually from the Actions tab or through HTTP API
-  workflow_dispatch:
-#  schedule:
-#    - cron: '0 0 * * *'  # Run every day at midnight
+  # workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # Run every day at midnight
 jobs:
   update-submodules:
     runs-on: ubuntu-latest
