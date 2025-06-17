@@ -1,6 +1,6 @@
 [submodule "ai4-mlflow"]
 	path = ai4-mlflow
-	url = https://github.com/ai4os/ai4-mlflow
+	url = https://github.com/m-team-kit/mlflow-auth-gui
 [submodule "frouros"]
 	path = frouros
 	url = https://github.com/IFCA-Advanced-Computing/frouros
