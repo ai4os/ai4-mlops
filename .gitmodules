@@ -4,3 +4,6 @@
 [submodule "frouros"]
 	path = frouros
 	url = https://github.com/IFCA-Advanced-Computing/frouros
+[submodule "drift-watch"]
+	path = drift-watch
+	url = https://github.com/m-team-kit/drift-watch
